@@ -17,11 +17,12 @@ float secondsRadius;
 float minutesRadius;
 float hoursRadius;
 float clockDiameter;
+PImage img1;
 
 void setup() {
   size(int(bound.x), int(bound.y));
-  //map = new UnfoldingMap(this, new OpenStreetMap.OpenStreetMapProvider());
-  map = new UnfoldingMap(this, 20, 100, 1000, 780, new Google.GoogleMapProvider());
+  map = new UnfoldingMap(this, new OpenStreetMap.OpenStreetMapProvider());
+  //map = new UnfoldingMap(this, 20, 100, 1000, 780, new Google.GoogleMapProvider());
   MapUtils.createDefaultEventDispatcher(this, map);
   map.zoomAndPanTo(beijing, 12);
   map.setZoomRange(10, 20);
@@ -56,9 +57,9 @@ void setup() {
      .setValue(0)
      .setNumberOfTickMarks(24)
      ;
-     
-  cp5.getController("time").getValueLabel().align(ControlP5.LEFT, ControlP5.BOTTOM_OUTSIDE).setPaddingX(-30);
-  cp5.getController("time").getCaptionLabel().align(ControlP5.RIGHT, ControlP5.BOTTOM_OUTSIDE).setPaddingX(-30);
+  
+   cp5.getController("time").getValueLabel().align(ControlP5.LEFT, ControlP5.BOTTOM_OUTSIDE).setPaddingX(-30);
+   cp5.getController("time").getCaptionLabel().align(ControlP5.RIGHT, ControlP5.BOTTOM_OUTSIDE).setPaddingX(-30);
 }
 
 void draw() {
@@ -71,13 +72,11 @@ void draw() {
   rect(0, bound.y*49/50, bound.x, bound.y/50);
  
   clock();
+  northarrow();
   
   fill(155,204,50);
   
-  secondsRadius = radius * 0.72;
-  minutesRadius = radius * 0.60;
-  hoursRadius = radius * 0.50;
-  clockDiameter = radius * 1.7;
+  
   
   textSize(40);
   fill(255);
@@ -90,6 +89,10 @@ void clock() {
   fill(80);
   noStroke();
   ellipse(cx, cy, clockDiameter, clockDiameter);
+  secondsRadius = radius * 0.72;
+  minutesRadius = radius * 0.60;
+  hoursRadius = radius * 0.50;
+  clockDiameter = radius * 1.7;
   
   // Angles for sin() and cos() start at 3 o'clock;
   // subtract HALF_PI to make them start at the top
@@ -116,4 +119,13 @@ void clock() {
     vertex(x, y);
   }
   endShape();
+}
+
+/********************************************************************
+Description: add arrow to the maps
+********************************************************************/
+void northarrow()
+{
+img1=loadImage("northarrow.jpg");
+image(img1,20,100,100,100);
 }
